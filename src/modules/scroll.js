@@ -15,9 +15,12 @@ export const scroll = () => {
     })
     // скрываем и показываем scroll
     window.addEventListener('scroll', (e) => {
+        //scroll появляется когда scrollTop равен карусели
         if (document.documentElement.scrollTop >= 814) {
+            //показываем скролл
             scrollBar.style.display = 'block'
         } else {
+            //скрываем
             scrollBar.style.display = 'none'
         }
     })
