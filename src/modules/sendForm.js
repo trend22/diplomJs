@@ -36,7 +36,13 @@ export const sendForm = ({
         let success = true
         //перебираем инпуты в форме
         const formElements = form.querySelectorAll('input')
-        formElements.forEach((input) => {
+        formElements.forEach((input, index) => {
+            //правка валидации, длина имени более или равно 2-м символам
+            if (index === 0) {
+                if (input.value.length < 2) {
+                    success = false
+                }
+            }
             //если инпут пустой, то 
             if (input.value === '') {
                 //то передаётся false, для последующей обработки ошибки
@@ -108,7 +114,7 @@ export const sendForm = ({
 
         } else {
             //в случае валидации false - передаём ошибку
-            alert('Заполните форму полностью!')
+            alert('Заполните форму полностью! Длинна имени должна быть более двух символов.')
             statusBlock.remove()
         }
     }

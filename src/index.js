@@ -24,6 +24,11 @@ import {
     scroll
 }
 from './modules/scroll'
+import {
+    sertificates
+}
+from './modules/sertificates'
+
 
 const body = document.querySelector('body')
 
@@ -45,3 +50,4 @@ if (body.className === 'balkony') {
     calc()
 }
 scroll()
+sertificates()

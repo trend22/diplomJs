@@ -45,7 +45,7 @@ export const timer = (deadline) => {
     //функция принимающая время обратного отсчёта
     const updateClock = () => {
         let getTime = getTimeRemaining()
-        //вывод времени на страницу
+        //вывод времени на страницу и показываем время
         if (getTime.timeRemaining >= 0) {
             timerDays.forEach(timerDay => timerDay.textContent = getTime.days)
             timerHours.forEach(timerHour => timerHour.textContent = getTime.hours)
