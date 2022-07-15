@@ -28,6 +28,10 @@ export const sertificates = () => {
             imgDocument.src = `images/documents/original/${arr[arr.length - 2]}.jpg`
             //показываем модальное окно и подложку 
             modalDocuments.style.display = 'block'
+            imgDocument.style.width = '80%'
+            imgDocument.style.height = '80%'
+
+            // modalDocuments.style.width = '30%'
             overlay.style.display = 'block'
             //анимируем появление модального окна библиотекой animate.style
             modalDocuments.classList.add('animate__animated', 'animate__fadeIn');

@@ -28,9 +28,14 @@ import {
     sertificates
 }
 from './modules/sertificates'
+import {
+    comments
+} from './modules/comments'
 
 
 const body = document.querySelector('body')
+//находим строку комментариев для вывода Loader
+const reviewsContainer = document.querySelector('#reviews .comments-container')
 
 slider()
 timer('18 july 2022')
@@ -51,3 +56,18 @@ if (body.className === 'balkony') {
 }
 scroll()
 sertificates()
+comments()
+//после загрузки вешаем событие на блок с выводом комментариев
+//loader грущится пока данные не придут с сервера
+window.addEventListener('DOMContentLoaded', () => {
+    const loader = document.createElement('img')
+
+    loader.src = 'images/review-loader.gif'
+    if (document.documentElement.clientWidth < 576) {
+        loader.style.marginLeft = '33%'
+    } else {
+        loader.style.marginLeft = '33%'
+    }
+
+    reviewsContainer.append(loader)
+})

@@ -1592,16 +1592,28 @@ input.error {
   color: rgba(0, 0, 0, 0.35);
 }
 
-.services-modal__close, .documents-modal__close {
+.services-modal__close {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 10px;
+  right: 10px;
   font-size: 36px;
   cursor: pointer;
 }
 
-.services-modal__close:hover, .documents-modal__close:hover {
-  color: rgba(0, 0, 0, 0.35);
+.documents-modal__close {
+  position: absolute;
+  top: 45px;
+  right: 200px;
+  font-size: 100px;
+  cursor: pointer;
+}
+
+.services-modal__close:hover {
+  color: rgba(9, 9, 9, 0.35);
+}
+
+.documents-modal__close:hover {
+  color: rgba(182, 15, 15, 0.35);
 }
 
 .overlay {
