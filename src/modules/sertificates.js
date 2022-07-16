@@ -30,17 +30,18 @@ export const sertificates = () => {
             document.body.style.position = 'fixed';
 
             arr = e.target.src.match(/[a-z0-9]+/gi)
-            //название файла будет предпоследним в массиве
-            //файлы должны называться латинскими буками и цифрами по порядку
+            // название файла будет предпоследним в массиве
+            // файлы должны называться латинскими буками и цифрами по порядку
             arr[arr.length - 2]
             //кладём название файла в путь к оригиналу картинки
             imgDocument.src = `images/documents/original/${arr[arr.length - 2]}.jpg`
             //показываем модальное окно и подложку 
             modalDocuments.style.display = 'block'
-            imgDocument.style.width = '80%'
-            imgDocument.style.height = '80%'
+            // imgDocument.style.position = 'absolute'
+            imgDocument.style.width = '60%'
+            imgDocument.style.height = '60%'
 
-            // modalDocuments.style.width = '30%'
+            closeBtnDocument.style.width = '47%'
             overlay.style.display = 'block'
             //анимируем появление модального окна библиотекой animate.style
             modalDocuments.classList.add('animate__animated', 'animate__fadeIn');
