@@ -10,6 +10,8 @@ export const sertificates = () => {
     const imgDocument = modalDocuments.querySelector('img')
     //крестик закрытия модалки замерщика
     const closeBtnDocument = document.querySelector('.documents-modal__close')
+
+    let scrollToDocuments
     //закрываем все подложки документов, чтобы кликать на img
     documentsOverlay.forEach((docOver) => docOver.style.display = 'none')
 
@@ -20,6 +22,13 @@ export const sertificates = () => {
         if (e.target.closest('img')) {
             //достаём путь из уменьшенной картинки
             let arr = []
+            //записываем значение скролла по Y, чтобы потом вернуться к нему при закрытии
+            scrollToDocuments = window.scrollY
+            //сразу же устанавливаем скроллу обратное значение по Y
+            document.body.style.top = `-${scrollToDocuments}px`;
+            //фиксируем документ
+            document.body.style.position = 'fixed';
+
             arr = e.target.src.match(/[a-z0-9]+/gi)
             //название файла будет предпоследним в массиве
             //файлы должны называться латинскими буками и цифрами по порядку
@@ -44,5 +53,9 @@ export const sertificates = () => {
         //закрываем модалку и подложку
         overlay.style.display = 'none'
         modalDocuments.style.display = 'none'
+        //возвращаем скролл на то место, откуда открывался сертификат
+        document.body.style.position = '';
+        document.body.style.top = ''
+        window.scrollTo(-scrollToDocuments, parseInt(-scrollToDocuments || '0') * -1);
     })
 }
