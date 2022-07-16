@@ -14,6 +14,8 @@ export const slider = () => {
     //isMobile - для того, чтобы при переходе из ширины более 576px вновь
     //отображать два элемента слайдера
     let isMobile = false
+    //переменная для исправления события mouseleave
+    let isArrowStop = false
     //получение количества слайдов на экране (мобильная и десктопная версии)
     const getCountSlide = () => {
         //получаем ширину экрана клиента
@@ -34,18 +36,28 @@ export const slider = () => {
         slides.forEach((slide, index) => {
             //если элемент слайда один и это мобильная версия
             if (isMobile && countSlide === 1) {
-                // и если индекс элемента больше либо равен количеству элемемнтов
+                // и если индекс элемента больше либо равен количеству элементов
                 if (index >= countSlide) {
-                    //то делаем невидимыми все элементы, кроме первого
-                    slide.style.display = 'none'
+                    // элементы слайдера поменяются только, если не было наведения на стрелку
+                    if (!isArrowStop) {
+                        //если наведения не было
+                        //то делаем невидимыми все элементы, кроме первого
+                        slide.style.display = 'none'
+                    }
                 }
             }
             //если элементов слайда два и это десктопная версия
             if (!isMobile && countSlide === 2) {
                 // и если индекс элемента больше либо равен количеству элементов
                 if (index >= countSlide) {
-                    //то делаем невидимыми все элементы, кроме первого и второго
-                    slide.style.display = 'none'
+
+                    // элементы слайдера поменяются только, если не было наведения на стрелку
+                    if (!isArrowStop) {
+                        //если наведения не было
+                        //то делаем невидимыми все элементы, кроме первого и второго
+                        slide.style.display = 'none'
+                    }
+
                 }
             }
             //если элементов слайда два и это мобильная версия
@@ -59,6 +71,20 @@ export const slider = () => {
                     //а первый и второй элемент делаем видимыми
                     slide.style.display = 'block'
                 }
+                currentSlide = 0
+            }
+            //если элемент слайда один и это десктопная версия
+            //то есть был переход от мобильной версии к десктопной
+            if (!isMobile && countSlide === 1) {
+                // и если индекс элемента больше либо равен количеству элементов
+                if (index >= countSlide) {
+                    //то делаем невидимыми все элементы, кроме первого и второго
+                    slide.style.display = 'none'
+                } else {
+                    //а первый и второй элемент делаем видимыми
+                    slide.style.display = 'block'
+                }
+                currentSlide = 0
             }
         })
     }
@@ -72,6 +98,7 @@ export const slider = () => {
 
     // функция проигрывания слайдов
     const autoSlide = () => {
+        console.log(currentSlide)
         //функция установки предыдущих элементов в невидимый режим
         previousSlide(slides, currentSlide, 'none')
         if (countSlide === 1) {
@@ -149,6 +176,7 @@ export const slider = () => {
         if (currentSlide >= slides.length) {
             currentSlide = 0
         }
+
         //обновление счётчика слайдов, чтобы проигрывались с конца
         if (currentSlide < 0) {
             if (countSlide === 1) {
@@ -161,22 +189,26 @@ export const slider = () => {
 
         nextSlide(slides, currentSlide, 'block')
     })
-    //слушатель при наведении мыши на стрелку и точки, чтобы останавливать autoSlide
+    // слушатель при наведении мыши на стрелку и точки, чтобы останавливать autoSlide
     sliderBlock.addEventListener(
         'mouseenter',
         (e) => {
             if (e.target.matches('.services__arrow--left img') || e.target.matches('.services__arrow--right img')) {
                 stopSlide()
+                //если на стрелку навели курсор, то переменная = true
+                isArrowStop = !isArrowStop
             }
         },
         true
     )
-    //слушатель при отведении курсора мыши на стрелку и точки, чтобы запускать autoSlide
+    // слушатель при отведении курсора мыши на стрелку и точки, чтобы запускать autoSlide
     sliderBlock.addEventListener(
         'mouseleave',
         (e) => {
             if (e.target.matches('.services__arrow--left img') || e.target.matches('.services__arrow--right img')) {
                 startSlide(timeInterval)
+                //если со стрелки отвели курсор, то переменная = false
+                isArrowStop = !isArrowStop
             }
         },
         true
