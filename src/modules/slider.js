@@ -1,9 +1,6 @@
 export const slider = () => {
     const sliderBlock = document.querySelector('.services-content')
     const slides = document.querySelectorAll('.service-block')
-    const blockArrows = document.querySelector('.services-arrows')
-
-    let arrowLeft = document.querySelectorAll('.dot')
 
     const timeInterval = 3000
     //currentSlide - счётчик сладов, interval - переменная для запуска и остановки autoSlide
@@ -98,7 +95,6 @@ export const slider = () => {
 
     // функция проигрывания слайдов
     const autoSlide = () => {
-        console.log(currentSlide)
         //функция установки предыдущих элементов в невидимый режим
         previousSlide(slides, currentSlide, 'none')
         if (countSlide === 1) {
